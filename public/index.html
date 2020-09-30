@@ -24,13 +24,21 @@
         <p class="price">price</p>
         <form action="" method="POST">
           <label for="quantity">Quantity</label>
-          <input type="number" id="quantity" value="1" min="1" max="10" />
+          <input
+            type="number"
+            name="quantity"
+            id="quantity"
+            value="1"
+            min="1"
+            max="10"
+          />
           <input type="hidden" name="sku" value="" />
           <button type="submit">Buy Now</button>
         </form>
       </div>
     </template>
 
+    <script src="https://js.stripe.com/v3/"></script>
     <script type="module">
       import { loadProducts } from "./js/load-products.js";
       loadProducts();

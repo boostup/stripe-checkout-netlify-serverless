@@ -1,3 +1,5 @@
+import { handleFormSubmission } from "./stripe-purchase.js";
+
 export async function loadProducts() {
   const data = await fetch("/.netlify/functions/get-products")
     .then((res) => res.json())
@@ -6,12 +8,12 @@ export async function loadProducts() {
   const products = document.querySelector(".products");
 
   data.forEach((item) => {
-    const product = cerateProductFromTemplate(item);
+    const product = createProductFromTemplate(item);
     products.appendChild(product);
   });
 }
 
-function cerateProductFromTemplate(item) {
+function createProductFromTemplate(item) {
   const template = document.querySelector("#product");
   const product = template.content.cloneNode(true);
 
@@ -26,6 +28,9 @@ function cerateProductFromTemplate(item) {
   const img = product.querySelector("img");
   img.src = item.image;
   img.alt = item.name;
+
+  const form = product.querySelector("form");
+  form.addEventListener("submit", handleFormSubmission);
 
   return product;
 }
